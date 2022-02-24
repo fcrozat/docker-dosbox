@@ -1,6 +1,6 @@
 ### https://github.com/theasp/docker-novnc
 #FROM novnc
-FROM registry.suse.com/bci/bci-base
+FROM registry.suse.com/bci/bci-init:15.3
 
 # Install git, supervisor, VNC, & X11 packages
 RUN set -ex; \
@@ -13,7 +13,7 @@ RUN set -ex; \
       x11vnc \
       xterm \
       python3-cryptography python3-PyJWT \
-      xvfb-run
+      xvfb-run dosbox unzip
 
 RUN sed -i -e "s/(uri, protocols);/(uri, ['binary', 'base64']);/g" /usr/share/novnc/core/websock.js
 
@@ -21,7 +21,7 @@ RUN sed -i -e "s/(uri, protocols);/(uri, ['binary', 'base64']);/g" /usr/share/no
 #RUN apt-get update && \
 #    apt-get install -y dosbox && \
 #    rm -rfv /var/lib/apt/lists/*
-RUN ADDITIONAL_MODULES="PackageHub,sle-module-desktop-applications" zypper --non-interactive --gpg-auto-import-keys in dosbox unzip && zypper clean
+#RUN ADDITIONAL_MODULES="PackageHub,sle-module-desktop-applications" zypper --non-interactive --gpg-auto-import-keys in dosbox unzip && zypper clean
 
 COPY dosbox.conf /root/.dosbox/dosbox-0.74-3.conf
 ### get games from https://dosgames.com/
@@ -30,7 +30,7 @@ COPY dosbox.conf /root/.dosbox/dosbox-0.74-3.conf
 # COPY game1.tar.gz /root/dos/game1
 # COPY game2 /root/dos/game2
 COPY DOSBOX_SSF2T.ZIP /tmp
-RUN unzip /tmp/DOSBOX_SSF2T.ZIP -d /root/dos/
+RUN unzip /tmp/DOSBOX_SSF2T.ZIP -d /root/dos/ && zypper --non-interactive rm unzip
 
 
 ### ... or use from volume
