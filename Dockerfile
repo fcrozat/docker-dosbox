@@ -23,8 +23,8 @@ COPY dosbox.conf /root/.dosbox/dosbox-0.74-3.conf
 # COPY game1.tar.gz /root/dos/game1
 # COPY game2 /root/dos/game2
 COPY DOSBOX_SSF2T.ZIP /tmp
-RUN unzip /tmp/DOSBOX_SSF2T.ZIP -d /root/dos/ && zypper --non-interactive rm unzip
 
+RUN unzip /tmp/DOSBOX_SSF2T.ZIP -d /root/dos/
 
 ### ... or use from volume
 # VOLUME /root/dos/
