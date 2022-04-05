@@ -11,7 +11,8 @@ RUN set -ex; \
       x11vnc \
       xterm \
       python3-cryptography python3-PyJWT \
-      xvfb-run dosbox unzip
+      xvfb-run dosbox unzip \
+    && zypper --non-interactive clean
 
 RUN sed -i -e "s/(uri, protocols);/(uri, ['binary', 'base64']);/g" /usr/share/novnc/core/websock.js
 
