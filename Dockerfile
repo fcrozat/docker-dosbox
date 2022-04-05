@@ -1,5 +1,3 @@
-### https://github.com/theasp/docker-novnc
-#FROM novnc
 FROM registry.suse.com/bci/bci-init:15.3
 
 # Install git, supervisor, VNC, & X11 packages
@@ -16,12 +14,6 @@ RUN set -ex; \
       xvfb-run dosbox unzip
 
 RUN sed -i -e "s/(uri, protocols);/(uri, ['binary', 'base64']);/g" /usr/share/novnc/core/websock.js
-
-
-#RUN apt-get update && \
-#    apt-get install -y dosbox && \
-#    rm -rfv /var/lib/apt/lists/*
-#RUN ADDITIONAL_MODULES="PackageHub,sle-module-desktop-applications" zypper --non-interactive --gpg-auto-import-keys in dosbox unzip && zypper clean
 
 COPY dosbox.conf /root/.dosbox/dosbox-0.74-3.conf
 ### get games from https://dosgames.com/
