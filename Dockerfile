@@ -1,4 +1,4 @@
-FROM registry.suse.com/bci/bci-init:15.3
+FROM registry.suse.com/bci/bci-base:latest
 ARG GAME_ZIP
 ARG LAUNCH_CMD
 ARG DISPLAY_WIDTH=1027
